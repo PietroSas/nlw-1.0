@@ -1,0 +1,113 @@
+1) server.ts:
+import express from "express";
+import routes from "./routes";
+
+const app = express();
+
+app.use(express.json()); 
+app.use(routes);
+app.listen(3333);
+
+2) routes.ts:
+import express from "express";
+
+const routes = express.Router();
+
+routes.get("/", (req, res) => {
+  return res.json({ message: "Hello World!" });
+});
+
+export default routes;
+
+3) *npm install knex* => Instalar ferramenta knex => Escreve as queries para o banco SQL usando javascript
+
+4) *npm install sqlite3* => instala o sqlite3 => Ou usar outro banco, como *npm install pg* / *npm install mysql*
+
+5) Criar arquivo de conexão com o sqlite
+5.1) src/database/connection.ts:
+import knex from 'knex';
+import path from 'path';
+
+const connection = knex({
+    client: 'sqlite3',
+    connection: {
+        filename: path.resolve(__dirname, 'database.sqlite') //__dirname é uma variável global que contém o diretório atual do arquivo
+    }
+});
+
+export default connection;
+
+6) Migrations = Histórico do banco de dados => Ajuda a trabalhar em time
+6.1) Criar pasta database/migrations
+6.2) Criar arquivos typescript para cada tabela
+6.2.1) Funções up e down em cada uma delas. Função up = Criar tabela. Função down = Deletar tabela.
+Ex:
+import Knex from 'knex';
+
+export async function up(knex: Knex) {
+    return knex.schema.createTable('points', table => {
+        table.increments('id').primary();
+        table.string('image').notNullable();
+        table.string('name').notNullable();
+        table.string('email').notNullable();
+        table.string('whatsapp').notNullable();
+        table.string('uf', 2).notNullable();
+        table.string('city').notNullable();
+        table.integer('latitude').notNullable();
+        table.integer('longitude').notNullable
+    });
+}
+
+export async function down(knex: Knex) {
+    return knex.schema.dropTable('point');
+}
+
+6.3) Criar na raiz do projeto o arquivo knexfile.ts para rodar os migrations e criar as tabelas:
+import path from "path";
+module.exports = {
+  client: "sqlite3",
+  connection: {
+    filename: path.resolve(__dirname, "src", "database", "database.sqlite"),
+  },
+  migrations: {
+    directory: path.resolve(__dirname, "src", "database", "migrations"),
+  },
+};
+6.3.1) *npx knex migrate:latest --knexfile knexfile.ts migrate:latest*
+
+6.4) Criar seed files => Adiciona dados iniciais para o banco => database/seeds/create_items.ts:
+import Knex from "knex";
+
+export async function seed(knex: Knex) {
+  await knex("items").insert([
+    {
+      title: "Lâmpadas",
+      image: "lampadas.svg",
+    },
+    {
+      title: "Pilas e baterias",
+      image: "baterias.svg",
+    },
+    {
+      title: "Papéis e Papelão",
+      image: "papeis-papelao.svg",
+    },
+    {
+      title: "Resíduos Eletrônicos",
+      image: "eletronicos.svg",
+    },
+    {
+      title: "Resíduos Orgânicos",
+      image: "organicos.svg",
+    },
+    {
+      title: "Óleo de Cozinha",
+      image: "oleo.svg",
+    },
+  ]);
+}
+
+6.4.1) *knex --knexfile knexfile.ts seed:run* => Roda os arquivos de seeds
+
+6.5) CORS (Cross-origin resource sharing) => Define quais endereços externos terão acesso à API
+6.5.1) *npm install cors* e *npm install @types/cors -D*

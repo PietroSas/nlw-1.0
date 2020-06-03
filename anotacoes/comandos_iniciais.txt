@@ -1,0 +1,34 @@
+1) Instalar o node
+1.1) Instalar o Chocolatey (no powershell)
+1.2) Instalar o nodejs (no powershell) - choco install nodejs-lts => versão lts
+
+2) Instalar o VSCode
+
+*) Fluxograma no whimsical.com
+
+3) Pastas
+3.1) server => pasta para o projeto node
+3.1.1) *npm init -y* => inicializa o projeto (package.json)
+3.1.2) *npm install express* => microframework para trabalhar com rotas => montar a API
+3.1.3) Criar o arquivo server.ts => import express from 'express';
+3.1.3.1) Could not find a declaration file for module 'express' => Precisa instalar definição de tipos do express pro TS => *npm install @types/express -D*
+3.1.4) Código base (server.ts):
+import express from 'express';
+const app = express();
+app.get('/', (req, res) => {
+	res.json({message:'Hello world^});
+});
+app.listen(3333);
+3.1.5) *npm install ts-node -D* => Para executar o código typescript.
+3.1.5) *npm install typescript -D* => Instalar o typescript.
+3.1.6) *npx typescript --init* => Inicializa as configurações do typescript.
+Obs: npx enxerga os pacotes instalados de forma global, para não precisar acessar a pasta onde foi instalado. Caso não tenha sido instalado, ele instala o pacote e depois executa.
+3.1.7) *npx ts-node src/server.ts* => Executa o server.ts.
+3.1.8) *npm install ts-node-dev -D* => Pacote para executar o código typescript, mas fica escutando as alterações e atualiza a aplicação automaticamente.
+3.1.8.1) Salvando script para executar o server.ts no package.json:
+"scripts": {"dev": "ts-node-dev src/server.ts"}
+3.1.8.2) *npm run dev* => Equivalente
+
+3.2) web => pasta para o projeto react
+3.2.1) *npx create-react-app web --template=typescript* => Criando a pasta do projeto react utilizando template de Typescript
+3.2.2) *npm start* => Executa o projeto react (npm react-scripts start) => Dentro da pasta web
