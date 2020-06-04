@@ -1,1 +1,15 @@
-web/.git
+web/.idea/
+web/.vscode/
+web/node_modules/
+web/build
+web/.DS_Store
+web/*.tgz
+web/my-app*
+web/template/src/__tests__/__snapshots__/
+web/lerna-debug.log
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/.changelog
+web/.npm/
+web/yarn.lock

@@ -1,0 +1,27 @@
+1) Propriedes de um componente:
+import React from 'react';
+interface HeaderProps { // Define os tipos das propriedades
+    title: string;
+}
+const Header:React.FC<HeaderProps> = (props) => {
+    return (
+        <header>
+            <h1>{props.title}</h1>
+        </header>
+    );
+}
+export default Header;
+
+2) Pacote para uso de ícones: *npm install react-icons*
+
+3) Biblioteca de roteamento: *npm install react-router-dom* + *npm install @types/react-router-dom -D*
+
+4) Single Page Application é criada usando Link:
+4.1) 
+import {Link} from 'react-router-dom;
+<Link to="/next-page">
+</link>
+
+5) Bibliotecas para mapas no react: *npm install leaflet react-leaflet* + *npm install @types/react-leaflet -D*
+
+6) Biblioteca para fazer requisições no react: *npm install axios*
