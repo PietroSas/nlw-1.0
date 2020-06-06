@@ -1,0 +1,14 @@
+1) Instalar o Expo CLI: *npm install -g expo-cli* (instalação global)
+2) Iniciar o projeto mobile: *expo init mobile* (cria a pasta mobile - no mesmo nível de server e web)
+2.1) Selecionar o template blank (TypeScript)
+3) Instalar fonte com expo: *expo install expo-font @expo-google-fonts/roboto @expo-google-fonts/ubuntu*
+4) Instalar a biblioteca react navigation: 
+=> *npm install @react-navigation/native*
+=> *expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view*
+=> *npm install @react-navigation/stack*
+5) Instalar biblioteca de mapas: *expo install react-native-maps*
+6) Instalar Constants: *expo install expo-constants*
+7) Instalar componente de imagens svg: *expo install  react-native-svg*
+8) Instalar client http axios: *npm install axios*
+9) Pegar a localização: *expo install expo-location*
+10) Lib para enviar email: *expo install expo-mail-composer*
